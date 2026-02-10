@@ -1,77 +1,120 @@
-import React, { useState } from 'react';
-import { Heart } from 'lucide-react';
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Richal</title>
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- React and ReactDOM -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <!-- Babel to convert JSX to JavaScript -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <style>
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
 
-export default function App() {
-  const [yesSize, setYesSize] = useState(1);
-  const [accepted, setAccepted] = useState(false);
+    <script type="text/babel">
+        const { useState } = React;
 
-  const handleNoClick = () => {
-    setYesSize(prev => prev + 0.5);
-  };
+        // Simple Heart Icon Component (replacing lucide-react for standalone usage)
+        const HeartIcon = ({ className }) => (
+            <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="2" 
+                strokeLinecap="round" 
+                strokeLinejoin="round" 
+                className={className}
+            >
+                <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5 4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
+            </svg>
+        );
 
-  const handleYesClick = () => {
-    setAccepted(true);
-  };
+        function App() {
+            const [yesSize, setYesSize] = useState(1);
+            const [accepted, setAccepted] = useState(false);
 
-  if (accepted) {
-    return (
-      <div className="min-h-screen bg-pink-100 flex flex-col items-center justify-center p-4 text-center">
-        {/* Success GIF */}
-        <img 
-          src="https://media.tenor.com/5mY0_OduUBsAAAAi/bears-hugging.gif" 
-          alt="Bears Hugging" 
-          className="w-64 h-64 object-contain mb-8"
-        />
-        <h1 className="text-4xl md:text-6xl font-bold text-red-600 mb-4">
-          Yay! Happy Valentine's Day, Richal! 💖
-        </h1>
-        <p className="text-xl text-pink-600">Best date ever!</p>
-      </div>
-    );
-  }
+            const handleNoClick = () => {
+                setYesSize(prev => prev + 0.5);
+            };
 
-  return (
-    <div className="min-h-screen bg-pink-50 flex flex-col items-center justify-center p-4 overflow-hidden relative">
-      {/* Floating background hearts for decoration */}
-      <div className="absolute top-10 left-10 opacity-20 text-pink-300">
-        <Heart className="w-12 h-12 fill-current" />
-      </div>
-      <div className="absolute bottom-10 right-10 opacity-20 text-pink-300">
-        <Heart className="w-16 h-16 fill-current" />
-      </div>
+            const handleYesClick = () => {
+                setAccepted(true);
+            };
 
-      <div className="z-10 flex flex-col items-center gap-8 w-full max-w-2xl">
-        {/* Question GIF */}
-        <img 
-          src="https://media.tenor.com/Al0q8cRzaSEAAAAi/cute-bear.gif" 
-          alt="Cute Bear" 
-          className="w-48 h-48 object-contain" 
-        />
-        
-        <h1 className="text-3xl md:text-5xl font-bold text-red-500 text-center leading-tight drop-shadow-sm">
-          Richal, will you be my Valentine?
-        </h1>
-        
-        <div className="flex flex-wrap justify-center items-center gap-8 w-full mt-4">
-          <button
-            onClick={handleYesClick}
-            style={{ 
-              transform: `scale(${yesSize})`,
-              transition: 'transform 0.2s ease-in-out'
-            }}
-            className="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-green-300 min-w-[100px]"
-          >
-            Yes
-          </button>
+            if (accepted) {
+                return (
+                    <div className="min-h-screen bg-pink-100 flex flex-col items-center justify-center p-4 text-center">
+                        {/* Success GIF */}
+                        <img 
+                            src="https://media.tenor.com/5mY0_OduUBsAAAAi/bears-hugging.gif" 
+                            alt="Bears Hugging" 
+                            className="w-64 h-64 object-contain mb-8"
+                        />
+                        <h1 className="text-4xl md:text-6xl font-bold text-red-600 mb-4">
+                            Yay! Happy Valentine's Day, Richal! 💖
+                        </h1>
+                        <p className="text-xl text-pink-600">Best date ever!</p>
+                    </div>
+                );
+            }
 
-          <button
-            onClick={handleNoClick}
-            className="bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-red-300 transition-all duration-200 min-w-[100px]"
-          >
-            No
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-}
+            return (
+                <div className="min-h-screen bg-pink-50 flex flex-col items-center justify-center p-4 overflow-hidden relative">
+                    {/* Floating background hearts for decoration */}
+                    <div className="absolute top-10 left-10 opacity-20 text-pink-300">
+                        <HeartIcon className="w-12 h-12 fill-current" />
+                    </div>
+                    <div className="absolute bottom-10 right-10 opacity-20 text-pink-300">
+                        <HeartIcon className="w-16 h-16 fill-current" />
+                    </div>
+
+                    <div className="z-10 flex flex-col items-center gap-8 w-full max-w-2xl">
+                        {/* Question GIF */}
+                        <img 
+                            src="https://media.tenor.com/Al0q8cRzaSEAAAAi/cute-bear.gif" 
+                            alt="Cute Bear" 
+                            className="w-48 h-48 object-contain" 
+                        />
+                        
+                        <h1 className="text-3xl md:text-5xl font-bold text-red-500 text-center leading-tight drop-shadow-sm">
+                            Richal, will you be my Valentine?
+                        </h1>
+                        
+                        <div className="flex flex-wrap justify-center items-center gap-8 w-full mt-4">
+                            <button
+                                onClick={handleYesClick}
+                                style={{ 
+                                    transform: `scale(${yesSize})`,
+                                    transition: 'transform 0.2s ease-in-out'
+                                }}
+                                className="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-green-300 min-w-[100px]"
+                            >
+                                Yes
+                            </button>
+
+                            <button
+                                onClick={handleNoClick}
+                                className="bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-red-300 transition-all duration-200 min-w-[100px]"
+                            >
+                                No
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
