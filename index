@@ -1,0 +1,77 @@
+import React, { useState } from 'react';
+import { Heart } from 'lucide-react';
+
+export default function App() {
+  const [yesSize, setYesSize] = useState(1);
+  const [accepted, setAccepted] = useState(false);
+
+  const handleNoClick = () => {
+    setYesSize(prev => prev + 0.5);
+  };
+
+  const handleYesClick = () => {
+    setAccepted(true);
+  };
+
+  if (accepted) {
+    return (
+      <div className="min-h-screen bg-pink-100 flex flex-col items-center justify-center p-4 text-center">
+        {/* Success GIF */}
+        <img 
+          src="https://media.tenor.com/5mY0_OduUBsAAAAi/bears-hugging.gif" 
+          alt="Bears Hugging" 
+          className="w-64 h-64 object-contain mb-8"
+        />
+        <h1 className="text-4xl md:text-6xl font-bold text-red-600 mb-4">
+          Yay! Happy Valentine's Day, Richal! 💖
+        </h1>
+        <p className="text-xl text-pink-600">Best date ever!</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-pink-50 flex flex-col items-center justify-center p-4 overflow-hidden relative">
+      {/* Floating background hearts for decoration */}
+      <div className="absolute top-10 left-10 opacity-20 text-pink-300">
+        <Heart className="w-12 h-12 fill-current" />
+      </div>
+      <div className="absolute bottom-10 right-10 opacity-20 text-pink-300">
+        <Heart className="w-16 h-16 fill-current" />
+      </div>
+
+      <div className="z-10 flex flex-col items-center gap-8 w-full max-w-2xl">
+        {/* Question GIF */}
+        <img 
+          src="https://media.tenor.com/Al0q8cRzaSEAAAAi/cute-bear.gif" 
+          alt="Cute Bear" 
+          className="w-48 h-48 object-contain" 
+        />
+        
+        <h1 className="text-3xl md:text-5xl font-bold text-red-500 text-center leading-tight drop-shadow-sm">
+          Richal, will you be my Valentine?
+        </h1>
+        
+        <div className="flex flex-wrap justify-center items-center gap-8 w-full mt-4">
+          <button
+            onClick={handleYesClick}
+            style={{ 
+              transform: `scale(${yesSize})`,
+              transition: 'transform 0.2s ease-in-out'
+            }}
+            className="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-green-300 min-w-[100px]"
+          >
+            Yes
+          </button>
+
+          <button
+            onClick={handleNoClick}
+            className="bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-red-300 transition-all duration-200 min-w-[100px]"
+          >
+            No
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
